@@ -1,8 +1,8 @@
 package com.vados.liteenglishtranslator.presenter
 
 import com.vados.liteenglishtranslator.domain.AppState
-import com.vados.liteenglishtranslator.model.datasource.DataSourceLocal
-import com.vados.liteenglishtranslator.model.datasource.DataSourceRemote
+import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
+import com.vados.liteenglishtranslator.model.datasource.remote.DataSourceRemote
 import com.vados.liteenglishtranslator.model.repository.RepositoryImplementation
 import com.vados.liteenglishtranslator.presenter.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.base.BaseView

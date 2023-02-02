@@ -1,6 +1,7 @@
-package com.vados.liteenglishtranslator.model.datasource
+package com.vados.liteenglishtranslator.model.datasource.remote
 
 import com.vados.liteenglishtranslator.domain.DataModel
+import com.vados.liteenglishtranslator.model.datasource.DataSource
 import io.reactivex.Observable
 
 class DataSourceRemote(private val remoteProvider: RetrofitImplementation = RetrofitImplementation()) :
