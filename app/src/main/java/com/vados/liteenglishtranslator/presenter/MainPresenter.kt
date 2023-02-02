@@ -1,10 +1,23 @@
 package com.vados.liteenglishtranslator.presenter
 
 import com.vados.liteenglishtranslator.domain.AppState
+import com.vados.liteenglishtranslator.model.datasource.DataSourceLocal
+import com.vados.liteenglishtranslator.model.datasource.DataSourceRemote
+import com.vados.liteenglishtranslator.model.repository.RepositoryImplementation
+import com.vados.liteenglishtranslator.presenter.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.base.BaseView
+import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 
-class MainPresenter<T : AppState, V : BaseView> : Presenter<T, V> {
+class MainPresenter<T : AppState, V : BaseView> (
+    private val interactor: MainInteractor = MainInteractor(
+        RepositoryImplementation(DataSourceRemote()),
+        RepositoryImplementation(DataSourceLocal())
+    ),
+    protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
+    protected val schedulerProvider: SchedulerProvider = SchedulerProvider()
+    ) : Presenter<T, V> {
 
     //ссылка на интерфейс Вью
     private var currentView: V? = null
@@ -23,7 +36,13 @@ class MainPresenter<T : AppState, V : BaseView> : Presenter<T, V> {
     }
 
     override fun getData(word: String, isOnline: Boolean) {
-        //TODO("Not yet implemented")
+        compositeDisposable.add(
+            interactor.getData(word, isOnline)
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .doOnSubscribe { currentView?.renderData(AppState.Loading(null)) }
+                .subscribeWith(getObserver())
+        )
     }
 
     /**
