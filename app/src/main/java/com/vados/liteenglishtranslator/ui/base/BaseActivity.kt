@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.vados.liteenglishtranslator.domain.AppState
 import com.vados.liteenglishtranslator.presenter.Presenter
 
+/***
+ * Базовый класс для реализации активити в формате MVP
+ */
 abstract class BaseActivity<T : AppState>: AppCompatActivity(), BaseView {
 
     protected lateinit var presenter: Presenter<T, BaseView>
