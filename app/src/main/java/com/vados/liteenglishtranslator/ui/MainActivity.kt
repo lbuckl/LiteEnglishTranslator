@@ -93,9 +93,10 @@ class MainActivity: BaseActivity<AppState>() {
      */
     private fun initFabClickListener(){
         binding.searchFab.setOnClickListener {
-
+            //Создаём диологовое окно
             val searchDialogFragment = SearchDialogFragment.newInstance()
 
+            //Инициализируем прослушку
             searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
 
@@ -105,6 +106,7 @@ class MainActivity: BaseActivity<AppState>() {
                 }
             })
 
+            //отображаем диологовое окно
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
     }

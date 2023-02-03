@@ -77,7 +77,6 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
     ): View {
         _binding = SearchDialogFragmentBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
