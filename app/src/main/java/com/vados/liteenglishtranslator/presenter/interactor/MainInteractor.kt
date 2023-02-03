@@ -12,9 +12,13 @@ class MainInteractor(
 
     override fun getData(word: String, fromRemoteSource: Boolean): Observable<AppState> {
         return if (fromRemoteSource) {
-            remoteRepository.getData(word).map { AppState.Success(it) }
+            remoteRepository.getData(word).map {
+                AppState.Success(it)
+            }
         } else {
-            localRepository.getData(word).map { AppState.Success(it) }
+            localRepository.getData(word).map {
+                AppState.Success(it)
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ class MainPresenter<T : AppState, V : BaseView> (
     }
 
     override fun detachView(view: V) {
-        //TODO("Not yet implemented")
+        compositeDisposable.clear()
         if (view == currentView) {
             currentView = null
         }
