@@ -3,11 +3,13 @@ package com.vados.liteenglishtranslator.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.vados.liteenglishtranslator.R
+import com.vados.liteenglishtranslator.databinding.ActivityMainRecyclerviewItemBinding
 import com.vados.liteenglishtranslator.domain.DataModel
 
+/**
+ * Адаптер для вывода результатов перевода в элементы RecyclerView
+ */
 class MainRVAdapter(
     private var onListItemClickListener: OnListItemClickListener,
     private var data: List<DataModel>
@@ -20,13 +22,12 @@ class MainRVAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
         return RecyclerItemViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_main_recyclerview_item, parent, false) as View
+            ActivityMainRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context)).root
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
@@ -36,11 +37,14 @@ class MainRVAdapter(
     inner class RecyclerItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(data: DataModel) {
-            if (layoutPosition != RecyclerView.NO_POSITION) {
-                itemView.findViewById<TextView>(R.id.header_textview_recycler_item).text = data.text
-                itemView.findViewById<TextView>(R.id.description_textview_recycler_item).text =
+            ActivityMainRecyclerviewItemBinding.bind(itemView).let {
+                if (layoutPosition != RecyclerView.NO_POSITION) {
+                    it.headerTextviewRecyclerItem.text = data.text
+                    it.descriptionTextviewRecyclerItem.text =
                     data.meanings?.get(0)?.translation?.translation
-                itemView.setOnClickListener { openInNewWindow(data) }
+
+                    itemView.setOnClickListener { openInNewWindow(data) }
+                }
             }
         }
     }

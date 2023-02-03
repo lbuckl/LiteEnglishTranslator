@@ -26,6 +26,10 @@ class MainActivity: BaseActivity<AppState>() {
         return MainPresenter()
     }
 
+
+    /**
+     * Лисенер от элементов RecyclerView
+     */
     private val onListItemClickListener: MainRVAdapter.OnListItemClickListener =
         object : MainRVAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
@@ -33,10 +37,15 @@ class MainActivity: BaseActivity<AppState>() {
             }
         }
 
+    /**
+     * Основная функция (местная бизнес логика фрагмента)
+     * отображает информацию в зависиомти от состояния appState
+     */
     override fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
                 val dataModel = appState.data
+
                 if (dataModel == null || dataModel.isEmpty()) {
                     showErrorScreen(getString(R.string.empty_server_response_on_success))
                 } else {
@@ -53,6 +62,7 @@ class MainActivity: BaseActivity<AppState>() {
             }
             is AppState.Loading -> {
                 showViewLoading()
+
                 if (appState.progress != null) {
                     binding.progressBarHorizontal.visibility = View.VISIBLE
                     binding.progressBarRound.visibility = View.GONE
@@ -77,6 +87,10 @@ class MainActivity: BaseActivity<AppState>() {
         initFabClickListener()
     }
 
+    /**
+     * Функция инициализирует и управляет действиями
+     * кнопки поиска/перевода слова
+     */
     private fun initFabClickListener(){
         binding.searchFab.setOnClickListener {
 
@@ -85,14 +99,19 @@ class MainActivity: BaseActivity<AppState>() {
             searchDialogFragment.setOnSearchClickListener(object :
                 SearchDialogFragment.OnSearchClickListener {
 
+                //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
                     presenter.getData(searchWord, true)
                 }
             })
+
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
     }
 
+    /**
+     * Дейсвия при ошибке
+     */
     private fun showErrorScreen(error: String?) {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
@@ -101,12 +120,18 @@ class MainActivity: BaseActivity<AppState>() {
         }
     }
 
+    /**
+     * Дейсвия при удачном запросе
+     */
     private fun showViewSuccess() {
         binding.successLinearLayout.visibility = View.VISIBLE
         binding.loadingFrameLayout.visibility = View.GONE
         binding.errorLinearLayout.visibility = View.GONE
     }
 
+    /**
+     * Дейсвия в момент загрузки данных
+     */
     private fun showViewLoading() {
         binding.successLinearLayout.visibility = View.GONE
         binding.loadingFrameLayout.visibility = View.VISIBLE
