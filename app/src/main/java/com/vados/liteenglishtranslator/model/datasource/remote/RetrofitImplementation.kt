@@ -10,6 +10,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Класс реализующий получение данных от Api сайта переводчика
+ */
 class RetrofitImplementation : DataSource<List<DataModel>> {
 
     override fun getData(word: String): Observable<List<DataModel>> {

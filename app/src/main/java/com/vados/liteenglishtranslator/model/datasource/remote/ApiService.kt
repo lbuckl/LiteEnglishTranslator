@@ -5,6 +5,9 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+/**
+ * Интерфейс для получения данных от Api сайта переводчика
+ */
 interface ApiService {
 
     @GET("words/search")

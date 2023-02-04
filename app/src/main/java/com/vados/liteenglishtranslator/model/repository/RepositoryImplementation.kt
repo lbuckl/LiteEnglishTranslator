@@ -4,6 +4,11 @@ import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import io.reactivex.Observable
 
+/**
+ * Класс основного репозитория для получения данных
+ * посылаем слово для перевода [word]
+ * получаем ответ в виде списка элементов [DataModel]
+ */
 class RepositoryImplementation(private val dataSource: DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {
 
