@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.domain
+package com.vados.liteenglishtranslator.model.domain
 
 /**
  * Класс состояний активити/фрагмента

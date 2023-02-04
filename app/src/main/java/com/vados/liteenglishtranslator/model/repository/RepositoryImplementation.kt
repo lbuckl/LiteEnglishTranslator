@@ -1,6 +1,6 @@
 package com.vados.liteenglishtranslator.model.repository
 
-import com.vados.liteenglishtranslator.domain.DataModel
+import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import io.reactivex.Observable
 

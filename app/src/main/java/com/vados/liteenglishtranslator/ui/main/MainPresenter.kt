@@ -1,10 +1,10 @@
-package com.vados.liteenglishtranslator.presenter
+package com.vados.liteenglishtranslator.ui.main
 
-import com.vados.liteenglishtranslator.domain.AppState
+import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
 import com.vados.liteenglishtranslator.model.datasource.remote.DataSourceRemote
 import com.vados.liteenglishtranslator.model.repository.RepositoryImplementation
-import com.vados.liteenglishtranslator.presenter.interactor.MainInteractor
+import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.base.BaseView
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable

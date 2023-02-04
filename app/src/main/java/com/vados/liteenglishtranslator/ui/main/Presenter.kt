@@ -1,6 +1,6 @@
-package com.vados.liteenglishtranslator.presenter
+package com.vados.liteenglishtranslator.ui.main
 
-import com.vados.liteenglishtranslator.domain.AppState
+import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.ui.base.BaseView
 
 interface Presenter<T : AppState, V : BaseView> {

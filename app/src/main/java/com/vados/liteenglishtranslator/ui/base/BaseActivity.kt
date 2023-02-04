@@ -2,8 +2,8 @@ package com.vados.liteenglishtranslator.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.vados.liteenglishtranslator.domain.AppState
-import com.vados.liteenglishtranslator.presenter.Presenter
+import com.vados.liteenglishtranslator.model.domain.AppState
+import com.vados.liteenglishtranslator.ui.main.Presenter
 
 /***
  * Базовый класс для реализации активити в формате MVP

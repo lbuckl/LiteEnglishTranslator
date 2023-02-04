@@ -1,7 +1,7 @@
-package com.vados.liteenglishtranslator.presenter.interactor
+package com.vados.liteenglishtranslator.ui.interactor
 
-import com.vados.liteenglishtranslator.domain.AppState
-import com.vados.liteenglishtranslator.domain.DataModel
+import com.vados.liteenglishtranslator.model.domain.AppState
+import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.repository.Repository
 import io.reactivex.Observable
 

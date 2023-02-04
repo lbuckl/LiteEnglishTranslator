@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.ui
+package com.vados.liteenglishtranslator.ui.main
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.R
 import com.vados.liteenglishtranslator.databinding.ActivityMainBinding
-import com.vados.liteenglishtranslator.domain.AppState
-import com.vados.liteenglishtranslator.domain.DataModel
-import com.vados.liteenglishtranslator.presenter.MainPresenter
-import com.vados.liteenglishtranslator.presenter.Presenter
+import com.vados.liteenglishtranslator.model.domain.AppState
+import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
 import com.vados.liteenglishtranslator.ui.base.BaseView
 

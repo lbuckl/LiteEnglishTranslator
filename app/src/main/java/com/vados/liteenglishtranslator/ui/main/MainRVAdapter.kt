@@ -1,11 +1,11 @@
-package com.vados.liteenglishtranslator.ui
+package com.vados.liteenglishtranslator.ui.main
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vados.liteenglishtranslator.databinding.ActivityMainRecyclerviewItemBinding
-import com.vados.liteenglishtranslator.domain.DataModel
+import com.vados.liteenglishtranslator.model.domain.DataModel
 
 /**
  * Адаптер для вывода результатов перевода в элементы RecyclerView

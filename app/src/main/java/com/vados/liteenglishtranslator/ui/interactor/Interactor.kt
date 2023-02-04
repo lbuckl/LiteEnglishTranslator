@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.presenter.interactor
+package com.vados.liteenglishtranslator.ui.interactor
 
 import io.reactivex.Observable
 

@@ -1,7 +1,7 @@
 package com.vados.liteenglishtranslator.model.datasource.remote
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.vados.liteenglishtranslator.domain.DataModel
+import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import io.reactivex.Observable
 import okhttp3.Interceptor
