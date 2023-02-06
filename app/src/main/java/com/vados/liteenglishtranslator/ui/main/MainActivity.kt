@@ -83,6 +83,8 @@ class MainActivity: BaseActivity<AppState>() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         initFabClickListener()
     }
 
