@@ -24,10 +24,6 @@ class MainActivity: BaseActivity<AppState>() {
 
     private var adapter: MainRVAdapter? = null
 
-    override fun createPresenter(): IPresenter<AppState, BaseView> {
-        return MainPresenter()
-    }
-
     lateinit var viewModel: MainViewModel
 
     /**
@@ -114,7 +110,6 @@ class MainActivity: BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-                    //presenter.getData(searchWord, true)
                     viewModel.getData(searchWord,true)
                 }
             })
@@ -131,7 +126,6 @@ class MainActivity: BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            //presenter.getData("hi", true)
             viewModel.getData("hi",true)
         }
     }
