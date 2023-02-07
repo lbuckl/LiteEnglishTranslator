@@ -3,9 +3,8 @@ package com.vados.liteenglishtranslator.ui.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.App
 import com.vados.liteenglishtranslator.R
@@ -14,18 +13,24 @@ import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
-import com.vados.liteenglishtranslator.ui.base.BaseView
+import javax.inject.Inject
 
 /**
  * Активити реализующая работу переводчика
  */
 class MainActivity: BaseActivity<AppState>() {
 
+    @Inject lateinit var app: App
+
     private lateinit var binding: ActivityMainBinding
 
     private var adapter: MainRVAdapter? = null
 
     lateinit var viewModel: MainViewModel
+
+    /*val vm: MainViewModel by viewModels {
+        App.instance.appComponent.viewModelsFactory()
+    }*/
 
     /**
      * Лисенер от элементов RecyclerView
@@ -92,7 +97,11 @@ class MainActivity: BaseActivity<AppState>() {
     }
 
     private fun initViewModel(){
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java].also {
+            App.instance.appComponent.inject(it)
+        }
+
         viewModel.getLiveData().observe(this){
             renderData(it)
         }
@@ -113,6 +122,7 @@ class MainActivity: BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
+                    //vm.getData(searchWord,true)
                     viewModel.getData(searchWord,true)
                 }
             })
@@ -129,6 +139,7 @@ class MainActivity: BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
+            //vm.getData("hi",true)
             viewModel.getData("hi",true)
         }
     }
