@@ -8,22 +8,21 @@ import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.repository.RepositoryImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
-import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
-import javax.inject.Named
 
 class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
-    private val interactor: MainInteractor = MainInteractor(
+    /*private val interactor: MainInteractor = MainInteractor(
         RepositoryImplementation(DataSourceRemote()),
         RepositoryImplementation(DataSourceLocal())
-    ),
-    protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
+    ),*/
+    protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : ViewModel(), IViewModel {
 
     @Inject lateinit var schedulerProvider: SchedulerProvider
+    @Inject lateinit var interactor: MainInteractor
 
     val getLiveData = {
         liveData
