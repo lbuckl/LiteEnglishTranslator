@@ -3,7 +3,6 @@ package com.vados.liteenglishtranslator.ui.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.App
@@ -13,14 +12,12 @@ import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
-import javax.inject.Inject
 
 /**
  * Активити реализующая работу переводчика
  */
 class MainActivity: BaseActivity<AppState>() {
 
-    @Inject lateinit var app: App
 
     private lateinit var binding: ActivityMainBinding
 
@@ -28,9 +25,10 @@ class MainActivity: BaseActivity<AppState>() {
 
     lateinit var viewModel: MainViewModel
 
-    /*val vm: MainViewModel by viewModels {
+   /*val vm: MainViewModel by viewModels {
         App.instance.appComponent.viewModelsFactory()
     }*/
+
 
     /**
      * Лисенер от элементов RecyclerView
