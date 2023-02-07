@@ -1,46 +1,38 @@
 package com.vados.liteenglishtranslator.ui.main
 
-import com.vados.liteenglishtranslator.model.domain.AppState
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
 import com.vados.liteenglishtranslator.model.datasource.remote.DataSourceRemote
+import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.repository.RepositoryImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
-import com.vados.liteenglishtranslator.ui.base.BaseView
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 
-class MainPresenter<T : AppState, V : BaseView> (
+class MainViewModel(
+    private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
     private val interactor: MainInteractor = MainInteractor(
         RepositoryImplementation(DataSourceRemote()),
         RepositoryImplementation(DataSourceLocal())
     ),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     protected val schedulerProvider: SchedulerProvider = SchedulerProvider()
-    ) : IPresenter<T, V> {
+) : ViewModel(), IViewModel {
 
-    //ссылка на интерфейс Вью
-    private var currentView: V? = null
-
-    override fun attachView(view: V) {
-        if (view != currentView) {
-            currentView = view
-        }
-    }
-
-    override fun detachView(view: V) {
-        compositeDisposable.clear()
-        if (view == currentView) {
-            currentView = null
-        }
+    val getLiveData = {
+        liveData
     }
 
     override fun getData(word: String, isOnline: Boolean) {
+        liveData.postValue(AppState.Loading(100))
+
         compositeDisposable.add(
-            interactor.getData(word, isOnline)
+            interactor.getData(word,isOnline)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { currentView?.renderData(AppState.Loading(null)) }
+                .doOnSubscribe { liveData.postValue(AppState.Loading(100)) }
                 .subscribeWith(getObserver())
         )
     }
@@ -52,16 +44,15 @@ class MainPresenter<T : AppState, V : BaseView> (
         return object : DisposableObserver<AppState>() {
 
             override fun onNext(appState: AppState) {
-                currentView?.renderData(appState)
+                liveData.value = appState
             }
 
             override fun onError(e: Throwable) {
-                currentView?.renderData(AppState.Error(e))
+                liveData.value = AppState.Error(e)
             }
 
             override fun onComplete() {
             }
         }
     }
-
 }

@@ -3,6 +3,9 @@ package com.vados.liteenglishtranslator.ui.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.R
 import com.vados.liteenglishtranslator.databinding.ActivityMainBinding
@@ -21,10 +24,11 @@ class MainActivity: BaseActivity<AppState>() {
 
     private var adapter: MainRVAdapter? = null
 
-    override fun createPresenter(): Presenter<AppState, BaseView> {
+    override fun createPresenter(): IPresenter<AppState, BaseView> {
         return MainPresenter()
     }
 
+    lateinit var viewModel: MainViewModel
 
     /**
      * Лисенер от элементов RecyclerView
@@ -83,9 +87,16 @@ class MainActivity: BaseActivity<AppState>() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         initFabClickListener()
+
+        initViewModel()
+    }
+
+    private fun initViewModel(){
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel.getLiveData().observe(this){
+            renderData(it)
+        }
     }
 
     /**
@@ -103,7 +114,8 @@ class MainActivity: BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-                    presenter.getData(searchWord, true)
+                    //presenter.getData(searchWord, true)
+                    viewModel.getData(searchWord,true)
                 }
             })
 
@@ -119,7 +131,8 @@ class MainActivity: BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            presenter.getData("hi", true)
+            //presenter.getData("hi", true)
+            viewModel.getData("hi",true)
         }
     }
 
