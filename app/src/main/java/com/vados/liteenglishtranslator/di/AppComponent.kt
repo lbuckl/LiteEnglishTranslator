@@ -24,5 +24,5 @@ import javax.inject.Singleton
  * Основной компонент даггер2
  */
 interface AppComponent {
-    //fun inject(baseActivity: BaseActivity<AppState>)
+    fun inject(mainActivity: MainActivity)
 }
