@@ -1,8 +1,9 @@
 package com.vados.liteenglishtranslator.di
 
+import com.vados.liteenglishtranslator.di.viewmodel.MainViewModelModule
+import com.vados.liteenglishtranslator.di.viewmodel.ViewModelProvidersFactory
 import com.vados.liteenglishtranslator.ui.main.MainActivity
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
-import com.vados.liteenglishtranslator.viewmodel.ViewModelProvidersFactory
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,7 +16,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        //Базовые компоненты:
         AppModule::class,
         SchedulersModule::class,
         MainInteractorModule::class,

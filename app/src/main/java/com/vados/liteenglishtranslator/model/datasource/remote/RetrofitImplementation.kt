@@ -1,6 +1,5 @@
 package com.vados.liteenglishtranslator.model.datasource.remote
 
-import android.util.Log
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.vados.liteenglishtranslator.model.domain.DataModel

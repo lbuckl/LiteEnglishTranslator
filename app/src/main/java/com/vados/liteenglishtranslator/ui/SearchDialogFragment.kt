@@ -45,7 +45,7 @@ class SearchDialogFragment : BottomSheetDialogFragment() {
     /**
      * Функция устанавливает видимость элементов при вводе/удалении текста
      */
-    private fun setElementVision(){
+    private fun setElementVision() {
         if (binding.searchEditText.text != null &&
             binding.searchEditText.text.toString().isNotEmpty()
         ) {

@@ -41,7 +41,7 @@ class MainRVAdapter(
                 if (layoutPosition != RecyclerView.NO_POSITION) {
                     it.headerTextviewRecyclerItem.text = data.text
                     it.descriptionTextviewRecyclerItem.text =
-                    data.meanings?.get(0)?.translation?.translation
+                        data.meanings?.get(0)?.translation?.translation
 
                     itemView.setOnClickListener { openInNewWindow(data) }
                 }

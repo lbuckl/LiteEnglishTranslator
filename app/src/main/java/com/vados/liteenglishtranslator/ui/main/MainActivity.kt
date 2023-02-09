@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.App
 import com.vados.liteenglishtranslator.R
@@ -17,13 +16,13 @@ import com.vados.liteenglishtranslator.ui.base.BaseActivity
 /**
  * Активити реализующая работу переводчика
  */
-class MainActivity: BaseActivity<AppState>() {
+class MainActivity : BaseActivity<AppState>() {
 
     private lateinit var binding: ActivityMainBinding
 
     private var adapter: MainRVAdapter? = null
 
-   val vm: MainViewModel by viewModels {
+    val vm: MainViewModel by viewModels {
         App.instance.appComponent.viewModelsFactory()
     }
 
@@ -92,10 +91,10 @@ class MainActivity: BaseActivity<AppState>() {
         initViewModel()
     }
 
-    private fun initViewModel(){
+    private fun initViewModel() {
         App.instance.appComponent.inject(vm)
 
-        vm.getLiveData().observe(this){
+        vm.getLiveData().observe(this) {
             renderData(it)
         }
     }
@@ -104,7 +103,7 @@ class MainActivity: BaseActivity<AppState>() {
      * Функция инициализирует и управляет действиями
      * кнопки поиска/перевода слова
      */
-    private fun initFabClickListener(){
+    private fun initFabClickListener() {
         binding.searchFab.setOnClickListener {
             //Создаём диологовое окно
             val searchDialogFragment = SearchDialogFragment.newInstance()
@@ -115,7 +114,7 @@ class MainActivity: BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-                    vm.getData(searchWord,true)
+                    vm.getData(searchWord, true)
                 }
             })
 
@@ -131,7 +130,7 @@ class MainActivity: BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            vm.getData("hi",true)
+            vm.getData("hi", true)
         }
     }
 

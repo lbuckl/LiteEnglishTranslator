@@ -7,6 +7,9 @@ import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import dagger.Module
 import dagger.Provides
 
+/**
+ * Модуль создания объекта MainInteractor
+ */
 @Module
 class MainInteractorModule {
 
