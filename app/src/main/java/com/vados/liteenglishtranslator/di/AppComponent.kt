@@ -2,6 +2,7 @@ package com.vados.liteenglishtranslator.di
 
 import com.vados.liteenglishtranslator.ui.main.MainActivity
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
+import com.vados.liteenglishtranslator.viewmodel.ViewModelProvidersFactory
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,7 +18,8 @@ import javax.inject.Singleton
         //Базовые компоненты:
         AppModule::class,
         SchedulersModule::class,
-        MainInteractorModule::class
+        MainInteractorModule::class,
+        MainViewModelModule::class
     ]
 )
 
@@ -28,5 +30,5 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(mainViewModel: MainViewModel)
 
-    //fun viewModelsFactory(): ViewModelProvidersFactory
+    fun viewModelsFactory(): ViewModelProvidersFactory
 }

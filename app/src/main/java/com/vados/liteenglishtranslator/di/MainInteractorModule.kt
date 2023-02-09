@@ -10,8 +10,8 @@ import dagger.Provides
 @Module
 class MainInteractorModule {
 
-    val roomDB: RoomDataBaseImplementation = RoomDataBaseImplementation()
-    val remoteProvider: RetrofitImplementation = RetrofitImplementation()
+    private val roomDB: RoomDataBaseImplementation = RoomDataBaseImplementation()
+    private val remoteProvider: RetrofitImplementation = RetrofitImplementation()
 
     @Provides
     fun mainInteractor(): MainInteractor {

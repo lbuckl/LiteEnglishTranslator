@@ -1,5 +1,6 @@
 package com.vados.liteenglishtranslator.model.datasource.local
 
+import android.util.Log
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import io.reactivex.Observable

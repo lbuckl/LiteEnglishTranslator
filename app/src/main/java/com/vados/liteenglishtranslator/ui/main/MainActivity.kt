@@ -3,6 +3,7 @@ package com.vados.liteenglishtranslator.ui.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.App
@@ -18,16 +19,13 @@ import com.vados.liteenglishtranslator.ui.base.BaseActivity
  */
 class MainActivity: BaseActivity<AppState>() {
 
-
     private lateinit var binding: ActivityMainBinding
 
     private var adapter: MainRVAdapter? = null
 
-    lateinit var viewModel: MainViewModel
-
-   /*val vm: MainViewModel by viewModels {
+   val vm: MainViewModel by viewModels {
         App.instance.appComponent.viewModelsFactory()
-    }*/
+    }
 
 
     /**
@@ -95,12 +93,9 @@ class MainActivity: BaseActivity<AppState>() {
     }
 
     private fun initViewModel(){
+        App.instance.appComponent.inject(vm)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java].also {
-            App.instance.appComponent.inject(it)
-        }
-
-        viewModel.getLiveData().observe(this){
+        vm.getLiveData().observe(this){
             renderData(it)
         }
     }
@@ -120,8 +115,7 @@ class MainActivity: BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-                    //vm.getData(searchWord,true)
-                    viewModel.getData(searchWord,true)
+                    vm.getData(searchWord,true)
                 }
             })
 
@@ -137,8 +131,7 @@ class MainActivity: BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            //vm.getData("hi",true)
-            viewModel.getData("hi",true)
+            vm.getData("hi",true)
         }
     }
 

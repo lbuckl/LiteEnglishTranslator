@@ -1,5 +1,6 @@
 package com.vados.liteenglishtranslator.ui.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vados.liteenglishtranslator.model.domain.AppState
@@ -13,7 +14,6 @@ class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : ViewModel(), IViewModel {
-
 
     @Inject lateinit var schedulerProvider: SchedulerProvider
     @Inject lateinit var interactor: MainInteractor
