@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vados.liteenglishtranslator.databinding.ActivityMainRecyclerviewItemBinding
 import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.vados.liteenglishtranslator.utils.parsel.convertMeaningsToString
 
 /**
  * Адаптер для вывода результатов перевода в элементы RecyclerView
@@ -40,8 +41,7 @@ class MainRVAdapter(
             ActivityMainRecyclerviewItemBinding.bind(itemView).let {
                 if (layoutPosition != RecyclerView.NO_POSITION) {
                     it.headerTextviewRecyclerItem.text = data.text
-                    it.descriptionTextviewRecyclerItem.text =
-                        data.meanings?.get(0)?.translation?.translation
+                    it.descriptionTextviewRecyclerItem.text = convertMeaningsToString(data.meanings!!)
 
                     itemView.setOnClickListener { openInNewWindow(data) }
                 }

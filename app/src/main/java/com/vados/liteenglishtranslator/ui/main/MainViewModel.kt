@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
+import com.vados.liteenglishtranslator.utils.parsel.parseSearchResults
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
@@ -13,6 +14,8 @@ class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : ViewModel(), IViewModel {
+
+    private var resultAppState: AppState? = null
 
     @Inject
     lateinit var schedulerProvider: SchedulerProvider
@@ -42,7 +45,8 @@ class MainViewModel(
         return object : DisposableObserver<AppState>() {
 
             override fun onNext(appState: AppState) {
-                liveData.value = appState
+                resultAppState = parseSearchResults(appState)
+                liveData.value = resultAppState
             }
 
             override fun onError(e: Throwable) {
