@@ -123,7 +123,6 @@ class MainActivity : BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-                    //vm.getData(searchWord, true)
 
                     networkStatus.isOnlineSingle()
                         .map {
@@ -133,7 +132,7 @@ class MainActivity : BaseActivity<AppState>() {
                                     "Связь отсутствует",
                                     Toast.LENGTH_SHORT)
                                     .show()
-                            else vm.getData(searchWord, it)
+                            else vm.getData(searchWord, true)
                         }
                         .subscribe()
                 }
