@@ -127,7 +127,13 @@ class MainActivity : BaseActivity<AppState>() {
 
                     networkStatus.isOnlineSingle()
                         .map {
-                            vm.getData(searchWord, it)
+                            if (!it)
+                                Toast.makeText(
+                                    this@MainActivity,
+                                    "Связь отсутствует",
+                                    Toast.LENGTH_SHORT)
+                                    .show()
+                            else vm.getData(searchWord, it)
                         }
                         .subscribe()
                 }
