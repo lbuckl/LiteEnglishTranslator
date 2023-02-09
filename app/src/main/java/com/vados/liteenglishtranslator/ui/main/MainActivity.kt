@@ -12,6 +12,13 @@ import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
+import com.vados.liteenglishtranslator.utils.network.INetworkStatus
+import com.vados.liteenglishtranslator.utils.network.NetworkStatus
+import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
+import io.reactivex.internal.operators.single.SingleDoOnSuccess
+import io.reactivex.rxjava3.core.Scheduler
+import javax.inject.Inject
+import javax.inject.Named
 
 /**
  * Активити реализующая работу переводчика
@@ -25,6 +32,8 @@ class MainActivity : BaseActivity<AppState>() {
     val vm: MainViewModel by viewModels {
         App.instance.appComponent.viewModelsFactory()
     }
+
+    @Inject lateinit var networkStatus: INetworkStatus
 
 
     /**
@@ -114,7 +123,13 @@ class MainActivity : BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-                    vm.getData(searchWord, true)
+                    //vm.getData(searchWord, true)
+
+                    networkStatus.isOnlineSingle()
+                        .map {
+                            vm.getData(searchWord, it)
+                        }
+                        .subscribe()
                 }
             })
 

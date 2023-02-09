@@ -19,7 +19,8 @@ import javax.inject.Singleton
         AppModule::class,
         SchedulersModule::class,
         MainInteractorModule::class,
-        MainViewModelModule::class
+        MainViewModelModule::class,
+        NetworkStatusModule::class
     ]
 )
 
