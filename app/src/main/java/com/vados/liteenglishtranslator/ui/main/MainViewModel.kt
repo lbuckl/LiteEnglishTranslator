@@ -20,19 +20,26 @@ class MainViewModel(
 
     private var resultAppState: AppState? = null
 
+
+
     private val schedulerProvider: SchedulerProvider by inject(
         SchedulerProvider::class.java,
-        named("SchedulerProvider"))
+        named("SchedulerProvider")
+    )
 
-    @Inject
-    lateinit var interactor: MainInteractor
+    private val interactor: MainInteractor by inject(
+        MainInteractor::class.java,
+        named("MainInterActor")
+    )
+
+    /*@Inject
+    lateinit var interactor: MainInteractor*/
 
     val getLiveData = {
         liveData
     }
 
     override fun getData(word: String, isOnline: Boolean) {
-        liveData.postValue(AppState.Loading(100))
 
         compositeDisposable.add(
             interactor.getData(word, isOnline)
@@ -52,11 +59,11 @@ class MainViewModel(
             override fun onNext(appState: AppState) {
                 resultAppState = parseSearchResults(appState)
 
-
                 liveData.value = resultAppState
             }
 
             override fun onError(e: Throwable) {
+                e.printStackTrace()
                 liveData.value = AppState.Error(e)
             }
 

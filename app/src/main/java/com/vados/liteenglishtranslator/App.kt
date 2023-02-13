@@ -23,7 +23,7 @@ class App : Application() {
         instance = this
 
         startKoin {
-            modules(listOf(DI.appModule))
+            modules(listOf(DI.appModule, DI.mainModule))
         }
 
         appComponent = DaggerAppComponent.builder()

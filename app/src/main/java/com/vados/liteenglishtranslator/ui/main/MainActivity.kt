@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.App
 import com.vados.liteenglishtranslator.R
@@ -13,6 +14,9 @@ import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
+import io.reactivex.Single
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
 import org.koin.android.ext.android.inject
 
 /**
@@ -28,7 +32,6 @@ class MainActivity : BaseActivity<AppState>() {
         App.instance.appComponent.viewModelsFactory()
     }
 
-    //@Inject lateinit var networkStatus: INetworkStatus
     private val networkStatus: INetworkStatus by inject()
 
 
@@ -138,6 +141,8 @@ class MainActivity : BaseActivity<AppState>() {
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
     }
+
+
 
     /**
      * Дейсвия при ошибке
