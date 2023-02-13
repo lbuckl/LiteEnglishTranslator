@@ -1,11 +1,12 @@
 package com.vados.liteenglishtranslator.koin
 
-import android.content.Context
 import com.vados.liteenglishtranslator.App
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
 import com.vados.liteenglishtranslator.utils.network.NetworkStatus
+import com.vados.liteenglishtranslator.utils.scheluders.ISchedulerProvider
+import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
 import org.koin.core.qualifier.named
-import org.koin.core.scope.get
+import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module
 
 /**
@@ -21,5 +22,7 @@ object DI {
         single { App.instance.applicationContext }
         //Контроль состояния сети интернет
         single<INetworkStatus> { NetworkStatus(context = get()) }
+        //Schedulers provider
+        factory(qualifier = named("SchedulerProvider")) {SchedulerProvider()}
     }
 }

@@ -13,13 +13,7 @@ import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
-import com.vados.liteenglishtranslator.utils.network.NetworkStatus
-import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
-import io.reactivex.internal.operators.single.SingleDoOnSuccess
-import io.reactivex.rxjava3.core.Scheduler
 import org.koin.android.ext.android.inject
-import javax.inject.Inject
-import javax.inject.Named
 
 /**
  * Активити реализующая работу переводчика

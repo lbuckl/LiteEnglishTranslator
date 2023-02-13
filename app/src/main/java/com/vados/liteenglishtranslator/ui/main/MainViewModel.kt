@@ -1,9 +1,6 @@
 package com.vados.liteenglishtranslator.ui.main
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
@@ -11,10 +8,11 @@ import com.vados.liteenglishtranslator.utils.parsel.parseSearchResults
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
+import org.koin.core.qualifier.named
+import org.koin.java.KoinJavaComponent.inject
 import javax.inject.Inject
 
 class MainViewModel(
-    //private val savedStateHandle: SavedStateHandle,
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
 ) : ViewModel(), IViewModel {
@@ -22,26 +20,16 @@ class MainViewModel(
 
     private var resultAppState: AppState? = null
 
-    @Inject
-    lateinit var schedulerProvider: SchedulerProvider
+    private val schedulerProvider: SchedulerProvider by inject(
+        SchedulerProvider::class.java,
+        named("SchedulerProvider"))
+
     @Inject
     lateinit var interactor: MainInteractor
 
     val getLiveData = {
-        //getLastData()
         liveData
     }
-
-    /*fun getLastData(){
-        savedStateHandle.getLiveData<AppState>("query").value?.let {
-            Log.v("@@@", "last")
-            liveData.value = it
-        }
-    }*/
-
-    /*fun setQuery(appState: AppState) {
-        savedStateHandle["query"] = appState
-    }*/
 
     override fun getData(word: String, isOnline: Boolean) {
         liveData.postValue(AppState.Loading(100))
@@ -63,7 +51,7 @@ class MainViewModel(
 
             override fun onNext(appState: AppState) {
                 resultAppState = parseSearchResults(appState)
-                //setQuery(resultAppState!!)
+
 
                 liveData.value = resultAppState
             }
