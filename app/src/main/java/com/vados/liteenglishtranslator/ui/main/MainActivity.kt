@@ -17,6 +17,7 @@ import com.vados.liteenglishtranslator.utils.network.NetworkStatus
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
 import io.reactivex.internal.operators.single.SingleDoOnSuccess
 import io.reactivex.rxjava3.core.Scheduler
+import org.koin.android.ext.android.inject
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -33,7 +34,8 @@ class MainActivity : BaseActivity<AppState>() {
         App.instance.appComponent.viewModelsFactory()
     }
 
-    @Inject lateinit var networkStatus: INetworkStatus
+    //@Inject lateinit var networkStatus: INetworkStatus
+    private val networkStatus: INetworkStatus by inject()
 
 
     /**
