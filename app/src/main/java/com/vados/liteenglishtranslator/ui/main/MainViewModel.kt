@@ -10,7 +10,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 import org.koin.core.qualifier.named
 import org.koin.java.KoinJavaComponent.inject
-import javax.inject.Inject
 
 class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
@@ -20,8 +19,7 @@ class MainViewModel(
 
     private var resultAppState: AppState? = null
 
-
-
+    //region koin inject
     private val schedulerProvider: SchedulerProvider by inject(
         SchedulerProvider::class.java,
         named("SchedulerProvider")
@@ -31,9 +29,7 @@ class MainViewModel(
         MainInteractor::class.java,
         named("MainInterActor")
     )
-
-    /*@Inject
-    lateinit var interactor: MainInteractor*/
+    //endregion
 
     val getLiveData = {
         liveData

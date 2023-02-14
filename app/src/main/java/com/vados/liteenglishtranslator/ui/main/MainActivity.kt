@@ -18,6 +18,7 @@ import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Активити реализующая работу переводчика
@@ -28,11 +29,11 @@ class MainActivity : BaseActivity<AppState>() {
 
     private var adapter: MainRVAdapter? = null
 
-    val vm: MainViewModel by viewModels {
-        App.instance.appComponent.viewModelsFactory()
-    }
-
+    //region Koin implementation
     private val networkStatus: INetworkStatus by inject()
+
+    private val viewModel: MainViewModel by viewModel()
+    //endregion
 
 
     /**
@@ -89,8 +90,6 @@ class MainActivity : BaseActivity<AppState>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.instance.appComponent.inject(this)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -100,9 +99,7 @@ class MainActivity : BaseActivity<AppState>() {
     }
 
     private fun initViewModel() {
-        App.instance.appComponent.inject(vm)
-
-        vm.getLiveData().observe(this) {
+        viewModel.getLiveData().observe(this) {
             renderData(it)
         }
     }
@@ -131,7 +128,7 @@ class MainActivity : BaseActivity<AppState>() {
                                     "Связь отсутствует",
                                     Toast.LENGTH_SHORT)
                                     .show()
-                            else vm.getData(searchWord, true)
+                            else viewModel.getData(searchWord, true)
                         }
                         .subscribe()
                 }
@@ -151,7 +148,7 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            vm.getData("hi", true)
+            viewModel.getData("hi", true)
         }
     }
 
