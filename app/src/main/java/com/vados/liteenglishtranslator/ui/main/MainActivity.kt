@@ -1,6 +1,7 @@
 package com.vados.liteenglishtranslator.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -17,13 +18,20 @@ import com.vados.liteenglishtranslator.utils.network.INetworkStatus
 import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.produce
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.qualifier.named
 
 /**
  * Активити реализующая работу переводчика
  */
 class MainActivity : BaseActivity<AppState>() {
+
+    private val mainScope = CoroutineScope(Dispatchers.Main)
+    private val ioScope = CoroutineScope(Dispatchers.IO)
 
     private lateinit var binding: ActivityMainBinding
 
@@ -35,6 +43,7 @@ class MainActivity : BaseActivity<AppState>() {
     private val viewModel: MainViewModel by viewModel()
     //endregion
 
+    private val nwStatusOnline: Channel<Boolean> by inject(named("NetworkStatusChanel"))
 
     /**
      * Лисенер от элементов RecyclerView
@@ -90,12 +99,21 @@ class MainActivity : BaseActivity<AppState>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        networkStatus.initialization()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initFabClickListener()
 
         initViewModel()
+
+        ioScope.launch {
+            while (true){
+                delay(500)
+                Log.v("@@@","recive: ${nwStatusOnline.receive()}")
+            }
+        }
     }
 
     private fun initViewModel() {
@@ -119,18 +137,18 @@ class MainActivity : BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-
-                    networkStatus.isOnlineSingle()
-                        .map {
+                        networkStatus.getStatus().let {
                             if (!it)
                                 Toast.makeText(
                                     this@MainActivity,
                                     "Связь отсутствует",
                                     Toast.LENGTH_SHORT)
                                     .show()
-                            else viewModel.getData(searchWord, true)
+
+                            else{
+                                viewModel.getData(searchWord, true)
+                            }
                         }
-                        .subscribe()
                 }
             })
 
@@ -179,5 +197,12 @@ class MainActivity : BaseActivity<AppState>() {
     companion object {
         private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG =
             "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        ioScope.cancel()
+        mainScope.cancel()
     }
 }

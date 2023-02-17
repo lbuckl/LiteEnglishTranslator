@@ -9,6 +9,8 @@ import com.vados.liteenglishtranslator.ui.main.MainViewModel
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
 import com.vados.liteenglishtranslator.utils.network.NetworkStatus
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.channels.Channel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -24,8 +26,23 @@ object DI {
     val appModule = module {
         //Контекст приложения
         single { App.instance.applicationContext }
+
+        //Канал контроля сети
+        single (qualifier = named("NetworkStatusChanel")) {
+            Channel<Boolean>(
+                capacity = 1,
+                onBufferOverflow = BufferOverflow.DROP_OLDEST,
+                onUndeliveredElement = null
+            )
+        }
         //Контроль состояния сети интернет
-        single<INetworkStatus> { NetworkStatus(context = get()) }
+        single<INetworkStatus> {
+            NetworkStatus(
+                context = get(),
+                networkChanel = get(named("NetworkStatusChanel"))
+            )
+        }
+
         //Schedulers provider
         single(qualifier = named("SchedulerProvider")) {SchedulerProvider()}
     }
