@@ -35,15 +35,16 @@ class MainViewModel(
         liveData
     }
 
-    override fun getData(word: String, isOnline: Boolean) {
-
-        compositeDisposable.add(
+    override suspend fun getData(word: String, isOnline: Boolean) {
+        /*compositeDisposable.add(
             interactor.getData(word, isOnline)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
                 .doOnSubscribe { liveData.postValue(AppState.Loading(100)) }
                 .subscribeWith(getObserver())
-        )
+        )*/
+
+        interactor.getData(word, isOnline)
     }
 
     /**

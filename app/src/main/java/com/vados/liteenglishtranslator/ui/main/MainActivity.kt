@@ -14,6 +14,7 @@ import com.vados.liteenglishtranslator.utils.network.INetworkStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -128,7 +129,9 @@ class MainActivity : BaseActivity<AppState>() {
                                     .show()
 
                             else{
-                                viewModel.getData(searchWord, true)
+                                mainScope.launch {
+                                    viewModel.getData(searchWord, true)
+                                }
                             }
                         }
                 }
@@ -148,7 +151,9 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            viewModel.getData("hi", true)
+            mainScope.launch {
+                viewModel.getData("hi", true)
+            }
         }
     }
 
