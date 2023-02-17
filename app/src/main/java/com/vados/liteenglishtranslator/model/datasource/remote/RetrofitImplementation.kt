@@ -1,9 +1,8 @@
 package com.vados.liteenglishtranslator.model.datasource.remote
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.vados.liteenglishtranslator.model.domain.DataModel
-import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
