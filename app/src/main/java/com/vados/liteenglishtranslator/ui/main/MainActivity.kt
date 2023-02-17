@@ -1,13 +1,9 @@
 package com.vados.liteenglishtranslator.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vados.liteenglishtranslator.App
 import com.vados.liteenglishtranslator.R
 import com.vados.liteenglishtranslator.databinding.ActivityMainBinding
 import com.vados.liteenglishtranslator.model.domain.AppState
@@ -15,15 +11,11 @@ import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
-import io.reactivex.Single
-import io.reactivex.SingleObserver
-import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.qualifier.named
 
 /**
  * Активити реализующая работу переводчика
@@ -42,8 +34,6 @@ class MainActivity : BaseActivity<AppState>() {
 
     private val viewModel: MainViewModel by viewModel()
     //endregion
-
-    private val nwStatusOnline: Channel<Boolean> by inject(named("NetworkStatusChanel"))
 
     /**
      * Лисенер от элементов RecyclerView
@@ -99,7 +89,6 @@ class MainActivity : BaseActivity<AppState>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        networkStatus.initialization()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -107,13 +96,6 @@ class MainActivity : BaseActivity<AppState>() {
         initFabClickListener()
 
         initViewModel()
-
-        ioScope.launch {
-            while (true){
-                delay(500)
-                Log.v("@@@","recive: ${nwStatusOnline.receive()}")
-            }
-        }
     }
 
     private fun initViewModel() {
