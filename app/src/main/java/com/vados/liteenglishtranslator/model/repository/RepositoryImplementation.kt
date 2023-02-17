@@ -2,7 +2,6 @@ package com.vados.liteenglishtranslator.model.repository
 
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.vados.liteenglishtranslator.model.domain.DataModel
-import kotlinx.coroutines.Deferred
 
 /**
  * Класс основного репозитория для получения данных

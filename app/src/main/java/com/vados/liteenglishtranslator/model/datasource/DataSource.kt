@@ -1,7 +1,5 @@
 package com.vados.liteenglishtranslator.model.datasource
 
-import kotlinx.coroutines.Deferred
-
 /**
  * Основной интерфейс получения данных
  */
