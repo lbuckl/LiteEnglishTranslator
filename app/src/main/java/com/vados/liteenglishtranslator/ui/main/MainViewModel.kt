@@ -37,7 +37,7 @@ class MainViewModel(
     override suspend fun getData(word: String, isOnline: Boolean) {
 
         withContext(Dispatchers.IO){
-            interactor.getData(word, isOnline)
+            liveData.postValue(parseSearchResults(interactor.getData(word, isOnline)))
         }
     }
 }
