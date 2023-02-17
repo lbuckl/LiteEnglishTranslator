@@ -6,14 +6,13 @@ import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.utils.parsel.parseSearchResults
 import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.core.qualifier.named
 import org.koin.java.KoinJavaComponent.inject
 
 class MainViewModel(
-    private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>(),
-    protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>()
 ) : ViewModel(), IViewModel {
 
 
@@ -36,41 +35,9 @@ class MainViewModel(
     }
 
     override suspend fun getData(word: String, isOnline: Boolean) {
-        /*compositeDisposable.add(
+
+        withContext(Dispatchers.IO){
             interactor.getData(word, isOnline)
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { liveData.postValue(AppState.Loading(100)) }
-                .subscribeWith(getObserver())
-        )*/
-
-        interactor.getData(word, isOnline)
-    }
-
-    /**
-     * Функция формирующая наблюдателья для получения данных
-     */
-    private fun getObserver(): DisposableObserver<AppState> {
-        return object : DisposableObserver<AppState>() {
-
-            override fun onNext(appState: AppState) {
-                resultAppState = parseSearchResults(appState)
-
-                liveData.value = resultAppState
-            }
-
-            override fun onError(e: Throwable) {
-                e.printStackTrace()
-                liveData.value = AppState.Error(e)
-            }
-
-            override fun onComplete() {
-            }
         }
-    }
-
-    override fun onCleared() {
-        compositeDisposable.dispose()
-        super.onCleared()
     }
 }

@@ -6,7 +6,6 @@ import android.net.Network
 import android.net.NetworkRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 

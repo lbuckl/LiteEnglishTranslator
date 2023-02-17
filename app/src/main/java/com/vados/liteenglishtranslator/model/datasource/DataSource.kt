@@ -1,10 +1,10 @@
 package com.vados.liteenglishtranslator.model.datasource
 
-import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 
 /**
  * Основной интерфейс получения данных
  */
 interface DataSource<T> {
-    fun getData(word: String): Observable<T>
+    suspend fun getData(word: String): T
 }
