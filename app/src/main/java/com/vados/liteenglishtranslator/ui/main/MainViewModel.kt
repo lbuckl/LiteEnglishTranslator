@@ -15,20 +15,12 @@ class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>()
 ) : ViewModel(), IViewModel {
 
-
     private var resultAppState: AppState? = null
-
-    //region koin inject
-    private val schedulerProvider: SchedulerProvider by inject(
-        SchedulerProvider::class.java,
-        named("SchedulerProvider")
-    )
 
     private val interactor: MainInteractor by inject(
         MainInteractor::class.java,
         named("MainInterActor")
     )
-    //endregion
 
     val getLiveData = {
         liveData

@@ -1,8 +1,10 @@
 package com.vados.liteenglishtranslator.di
 
 import com.vados.liteenglishtranslator.App
+import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.vados.liteenglishtranslator.model.datasource.local.RoomDataBaseImplementation
 import com.vados.liteenglishtranslator.model.datasource.remote.RetrofitImplementation
+import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.repository.RepositoryImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
@@ -16,9 +18,6 @@ import org.koin.dsl.module
  * Основной объект koin для внедрения зависимостей
  */
 object DI {
-
-    private val roomDB: RoomDataBaseImplementation = RoomDataBaseImplementation()
-    private val remoteProvider: RetrofitImplementation = RetrofitImplementation()
 
     //Основной модуль
     val appModule = module {
@@ -36,11 +35,18 @@ object DI {
 
     //Модуль для реализации main компонентов
     val mainModule = module {
+        single<DataSource<List<DataModel>>> (named("remoteProvider")) {
+            RetrofitImplementation()
+        }
+        single<DataSource<List<DataModel>>> (named("roomDB")) {
+            RoomDataBaseImplementation(context = get())
+        }
+
         //MainInterActor
-        factory (qualifier = named("MainInterActor")){
+        factory(qualifier = named("MainInterActor")){
             MainInteractor(
-                RepositoryImplementation(remoteProvider),
-                RepositoryImplementation(roomDB)
+                RepositoryImplementation(get(named("remoteProvider"))),
+                RepositoryImplementation(get(named("roomDB")))
             )
         }
         //MainViewModel

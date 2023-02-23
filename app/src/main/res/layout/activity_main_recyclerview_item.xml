@@ -10,19 +10,19 @@
 
     <TextView
             android:id="@+id/header_textview_recycler_item"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_marginStart="@dimen/margin_medium"
             android:layout_height="wrap_content"
             style="@style/HeaderTextStyle"
             tools:text="Header"/>
 
     <TextView
-            android:id="@+id/description_textview_recycler_item"
-            android:layout_width="wrap_content"
-            style="@style/BaseTextStyle"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_height="wrap_content"
-            tools:text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."/>
+        android:id="@+id/description_textview_recycler_item"
+        style="@style/BaseTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        tools:text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
 
     <View
         android:layout_width="match_parent"

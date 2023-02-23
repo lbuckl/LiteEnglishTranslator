@@ -1,5 +1,6 @@
 package com.vados.liteenglishtranslator.ui.interactor
 
+import android.util.Log
 import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.repository.Repository
@@ -16,6 +17,7 @@ class MainInteractor(
         return if (fromRemoteSource) {
                 AppState.Success(remoteRepository.getData(word))
         } else {
+                Log.v("@@@", "MainInteractor: localRepository")
                 AppState.Success(localRepository.getData(word))
         }
     }

@@ -121,13 +121,16 @@ class MainActivity : BaseActivity<AppState>() {
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
                         networkStatus.getStatus().let {
-                            if (!it)
+                            if (!it){
                                 Toast.makeText(
                                     this@MainActivity,
                                     "Связь отсутствует",
                                     Toast.LENGTH_SHORT)
                                     .show()
-
+                                mainScope.launch{
+                                    viewModel.getData(searchWord, false)
+                                }
+                            }
                             else{
                                 mainScope.launch {
                                     viewModel.getData(searchWord, true)
