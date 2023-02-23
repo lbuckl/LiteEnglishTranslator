@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface TranslateDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(users: List<TranslateEntity>)
 
     @Query("SELECT * FROM Translated_words WHERE word = :wordKey")

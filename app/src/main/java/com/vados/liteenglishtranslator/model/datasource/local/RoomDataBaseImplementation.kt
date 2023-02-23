@@ -11,7 +11,7 @@ import com.vados.liteenglishtranslator.model.domain.Translation
 /**
  * Класс для реализации получения данных из БД Room
  */
-class RoomDataBaseImplementation(context: Context) : DataSource<List<DataModel>> {
+class RoomDataBaseImplementation(private val context: Context) : DataSource<List<DataModel>> {
 
     private val translateDB: TranslateDataBase? = null
 
@@ -29,11 +29,37 @@ class RoomDataBaseImplementation(context: Context) : DataSource<List<DataModel>>
         )
     }
 
-    /*fun getTranslateDB(): TranslateDataBase {
-        if (translateDB == null){
-            translateDB = Room.databaseBuilder(
+    suspend fun setData(translations: DataModel){
+        getTranslateDB().getDAO().insertAll(
+            dataModelToDb(translations)
+        )
+    }
 
+    private fun getTranslateDB(): TranslateDataBase {
+        return if (translateDB == null){
+            Room.databaseBuilder(
+                context,
+                TranslateDataBase::class.java,
+                TranslateDataBase.TRANSLATE_DB_NAME
+            ).build()
+        } else translateDB
+    }
+
+    private fun dataModelToDb(translations: DataModel): List<TranslateEntity>{
+        val result = mutableListOf<TranslateEntity>()
+        val listSize = translations.meanings!!.size
+
+        for (i in 0 until listSize) {
+            result.add(
+                TranslateEntity(
+                    0,
+                    translations.text!!,
+                    translations.meanings[i].translation!!.translation!!,
+                    translations.meanings[i].imageUrl!!
+                )
             )
         }
-    }*/
+
+        return result
+    }
 }

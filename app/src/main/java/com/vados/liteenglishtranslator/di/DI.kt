@@ -2,10 +2,12 @@ package com.vados.liteenglishtranslator.di
 
 import com.vados.liteenglishtranslator.App
 import com.vados.liteenglishtranslator.model.datasource.DataSource
+import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
 import com.vados.liteenglishtranslator.model.datasource.local.RoomDataBaseImplementation
 import com.vados.liteenglishtranslator.model.datasource.remote.RetrofitImplementation
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.repository.RepositoryImplementation
+import com.vados.liteenglishtranslator.model.repository.RepositoryLocalImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
@@ -38,15 +40,15 @@ object DI {
         single<DataSource<List<DataModel>>> (named("remoteProvider")) {
             RetrofitImplementation()
         }
-        single<DataSource<List<DataModel>>> (named("roomDB")) {
-            RoomDataBaseImplementation(context = get())
+        single (named("roomDB")) {
+            DataSourceLocal(RoomDataBaseImplementation(context = get()))
         }
 
         //MainInterActor
         factory(qualifier = named("MainInterActor")){
             MainInteractor(
                 RepositoryImplementation(get(named("remoteProvider"))),
-                RepositoryImplementation(get(named("roomDB")))
+                RepositoryLocalImplementation(get(named("roomDB")))
             )
         }
         //MainViewModel
