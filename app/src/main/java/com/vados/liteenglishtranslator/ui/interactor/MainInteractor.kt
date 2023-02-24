@@ -3,14 +3,14 @@ package com.vados.liteenglishtranslator.ui.interactor
 import android.util.Log
 import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
-import com.vados.liteenglishtranslator.model.repository.Repository
+import com.vados.liteenglishtranslator.model.repository.RepositoryRemote
 import com.vados.liteenglishtranslator.model.repository.RepositoryLocal
 
 /**
  * Класс интерактора для получения данных локально/через Api
  */
 class MainInteractor(
-    private val remoteRepository: Repository<List<DataModel>>,
+    private val remoteRepository: RepositoryRemote<List<DataModel>>,
     private val localRepository: RepositoryLocal<List<DataModel>>
 ) : Interactor<AppState> {
 

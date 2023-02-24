@@ -3,7 +3,7 @@ package com.vados.liteenglishtranslator.model.repository
 /**
  * Интерфейс основного репозитория
  */
-interface Repository<T> {
+interface RepositoryRemote<T> {
 
     suspend fun getData(word: String): T
 }
