@@ -54,7 +54,7 @@ class NetworkStatus(val context: Context) : INetworkStatus {
     private fun initialize(): Boolean {
         networkStatus = try {
             connectivityManager.activeNetworkInfo!!.isConnected
-        }catch (e: NullPointerException){
+        } catch (e: NullPointerException) {
             false
         }
 
@@ -66,7 +66,7 @@ class NetworkStatus(val context: Context) : INetworkStatus {
      * Функция получения состояни сети
      */
     override fun getStatus(): Boolean {
-        if (!isInit){
+        if (!isInit) {
             return initialize()
         }
         return networkStatus

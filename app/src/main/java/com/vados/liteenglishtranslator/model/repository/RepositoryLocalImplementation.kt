@@ -3,7 +3,7 @@ package com.vados.liteenglishtranslator.model.repository
 import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
 import com.vados.liteenglishtranslator.model.domain.DataModel
 
-class RepositoryLocalImplementation (private val dataSource: DataSourceLocal) :
+class RepositoryLocalImplementation(private val dataSource: DataSourceLocal) :
     RepositoryLocal<List<DataModel>> {
 
     override suspend fun getData(word: String): List<DataModel> {
@@ -11,6 +11,7 @@ class RepositoryLocalImplementation (private val dataSource: DataSourceLocal) :
     }
 
     override suspend fun saveDataToDB(translations: DataModel) {
-        dataSource.saveDataToDB(translations)
+        if (dataSource.getData(translations.text!!).isNotEmpty())
+            dataSource.saveDataToDB(translations)
     }
 }

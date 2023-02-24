@@ -41,7 +41,8 @@ class MainRVAdapter(
             ActivityMainRecyclerviewItemBinding.bind(itemView).let {
                 if (layoutPosition != RecyclerView.NO_POSITION) {
                     it.headerTextviewRecyclerItem.text = data.text
-                    it.descriptionTextviewRecyclerItem.text = convertMeaningsToString(data.meanings!!)
+                    it.descriptionTextviewRecyclerItem.text =
+                        convertMeaningsToString(data.meanings!!)
 
                     itemView.setOnClickListener { openInNewWindow(data) }
                 }

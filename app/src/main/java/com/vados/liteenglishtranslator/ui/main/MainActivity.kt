@@ -55,7 +55,7 @@ class MainActivity : BaseActivity<AppState>() {
             is AppState.Success -> {
                 val dataModel = appState.data
 
-                if (dataModel == null || dataModel.isEmpty()) {
+                if (dataModel.isNullOrEmpty()) {
                     showErrorScreen(getString(R.string.empty_server_response_on_success))
                 } else {
                     showViewSuccess()
@@ -120,23 +120,7 @@ class MainActivity : BaseActivity<AppState>() {
 
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
-                        networkStatus.getStatus().let {
-                            if (!it){
-                                Toast.makeText(
-                                    this@MainActivity,
-                                    "Связь отсутствует",
-                                    Toast.LENGTH_SHORT)
-                                    .show()
-                                mainScope.launch{
-                                    viewModel.getData(searchWord, false)
-                                }
-                            }
-                            else{
-                                mainScope.launch {
-                                    viewModel.getData(searchWord, true)
-                                }
-                            }
-                        }
+                    dataRequest(searchWord)
                 }
             })
 
@@ -145,7 +129,45 @@ class MainActivity : BaseActivity<AppState>() {
         }
     }
 
+    private fun dataRequest(searchWord: String) {
+        networkStatus.getStatus().let {
+            if (!it) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Связь отсутствует",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                mainScope.launch {
+                    viewModel.getData(searchWord, false)
+                }
+            } else {
+                mainScope.launch {
+                    viewModel.getData(searchWord, true)
+                }
+            }
+        }
+    }
 
+    private fun dataReload() {
+        networkStatus.getStatus().let {
+            if (!it) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Связь отсутствует",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                mainScope.launch {
+                    viewModel.reloadData(false)
+                }
+            } else {
+                mainScope.launch {
+                    viewModel.reloadData(true)
+                }
+            }
+        }
+    }
 
     /**
      * Дейсвия при ошибке
@@ -154,9 +176,7 @@ class MainActivity : BaseActivity<AppState>() {
         showViewError()
         binding.errorTextview.text = error ?: getString(R.string.undefined_error)
         binding.reloadButton.setOnClickListener {
-            mainScope.launch {
-                viewModel.getData("hi", true)
-            }
+            dataReload()
         }
     }
 

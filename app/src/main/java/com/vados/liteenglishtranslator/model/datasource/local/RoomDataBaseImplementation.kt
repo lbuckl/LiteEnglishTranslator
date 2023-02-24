@@ -1,12 +1,12 @@
 package com.vados.liteenglishtranslator.model.datasource.local
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.domain.Meanings
 import com.vados.liteenglishtranslator.model.domain.Translation
+import com.vados.liteenglishtranslator.utils.parsel.getEmptyDataModel
 
 /**
  * Класс для реализации получения данных из БД Room
@@ -16,27 +16,18 @@ class RoomDataBaseImplementation(private val context: Context) : DataSource<List
     private val translateDB: TranslateDataBase? = null
 
     override suspend fun getData(word: String): List<DataModel> {
-        Log.v("@@@", "RoomDataBaseImplementation: getData")
 
-        return listOf(
-            DataModel(
-            "GetFromRoomDB",
-            listOf(Meanings(
-                Translation("GetFromRoomDB"),
-            "GetFromRoomDB"
-            ))
-        )
-        )
+        return listOf(dbToDataModel(getTranslateDB().getDAO().queryAllTranslates(word)))
     }
 
-    suspend fun setData(translations: DataModel){
+    fun setData(translations: DataModel) {
         getTranslateDB().getDAO().insertAll(
             dataModelToDb(translations)
         )
     }
 
     private fun getTranslateDB(): TranslateDataBase {
-        return if (translateDB == null){
+        return if (translateDB == null) {
             Room.databaseBuilder(
                 context,
                 TranslateDataBase::class.java,
@@ -45,7 +36,7 @@ class RoomDataBaseImplementation(private val context: Context) : DataSource<List
         } else translateDB
     }
 
-    private fun dataModelToDb(translations: DataModel): List<TranslateEntity>{
+    private fun dataModelToDb(translations: DataModel): List<TranslateEntity> {
         val result = mutableListOf<TranslateEntity>()
         val listSize = translations.meanings!!.size
 
@@ -61,5 +52,18 @@ class RoomDataBaseImplementation(private val context: Context) : DataSource<List
         }
 
         return result
+    }
+
+    private fun dbToDataModel(data: List<TranslateEntity>): DataModel {
+        return if (data.isEmpty()) getEmptyDataModel()
+        else DataModel(
+            data[0].word,
+            data.map {
+                Meanings(
+                    Translation(it.translate),
+                    it.pictureUrl
+                )
+            }
+        )
     }
 }

@@ -3,6 +3,7 @@ package com.vados.liteenglishtranslator.utils.parsel
 import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.domain.Meanings
+import com.vados.liteenglishtranslator.model.domain.Translation
 
 /**
  * Функция проверяет результат на нулевые или пустые данные
@@ -61,3 +62,16 @@ fun convertMeaningsToString(meanings: List<Meanings>): String {
     }
     return meaningsSeparatedByComma
 }
+
+/**
+ * возвращает пустой объект DataModel
+ */
+fun getEmptyDataModel() = DataModel(
+    "",
+    listOf(
+        Meanings(
+            Translation(""),
+            ""
+        )
+    )
+)

@@ -1,10 +1,9 @@
 package com.vados.liteenglishtranslator.ui.interactor
 
-import android.util.Log
 import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
-import com.vados.liteenglishtranslator.model.repository.RepositoryRemote
 import com.vados.liteenglishtranslator.model.repository.RepositoryLocal
+import com.vados.liteenglishtranslator.model.repository.RepositoryRemote
 
 /**
  * Класс интерактора для получения данных локально/через Api
@@ -18,14 +17,17 @@ class MainInteractor(
         return if (fromRemoteSource) {
             val result = remoteRepository.getData(word)
             saveDataToDb(result[0])
-                AppState.Success(result)
+            AppState.Success(result)
         } else {
-                Log.v("@@@", "MainInteractor: localRepository")
-                AppState.Success(localRepository.getData(word))
+            localRepository.getData(word).let {
+                if (it.isNotEmpty()) AppState.Success(localRepository.getData(word))
+                else AppState.Error(Throwable("Received empty data "))
+            }
+
         }
     }
 
-    private suspend fun saveDataToDb(translations: DataModel){
+    private suspend fun saveDataToDb(translations: DataModel) {
         localRepository.saveDataToDB(translations)
     }
 }
