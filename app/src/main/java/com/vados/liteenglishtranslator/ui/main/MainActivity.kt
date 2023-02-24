@@ -10,11 +10,9 @@ import com.vados.liteenglishtranslator.model.domain.AppState
 import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
+import com.vados.liteenglishtranslator.utils.getImage
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -42,7 +40,19 @@ class MainActivity : BaseActivity<AppState>() {
     private val onListItemClickListener: MainRVAdapter.OnListItemClickListener =
         object : MainRVAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
+
+                ioScope.launch {
+                    val icon = getImage(this@MainActivity, data.meanings!![0].imageUrl)
+
+                    withContext(Dispatchers.Main) {
+
+                        binding.successLinearLayout.visibility = View.GONE
+                        binding.imageLayout.visibility = View.VISIBLE
+
+                        binding.ivDetails.setImageDrawable(icon)
+                    }
+                }
+                //Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -97,11 +107,20 @@ class MainActivity : BaseActivity<AppState>() {
         initFabClickListener()
 
         initViewModel()
+
+        initImageCloseButton()
     }
 
     private fun initViewModel() {
         viewModel.getLiveData().observe(this) {
             renderData(it)
+        }
+    }
+
+    private fun initImageCloseButton() {
+        binding.btnCloseImage.setOnClickListener {
+            binding.imageLayout.visibility = View.GONE
+            binding.successLinearLayout.visibility = View.VISIBLE
         }
     }
 

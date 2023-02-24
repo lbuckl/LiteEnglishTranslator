@@ -7,6 +7,30 @@
     >
 
     <FrameLayout
+        android:id="@+id/image_layout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+        </ImageView>
+
+        <ImageButton
+            android:id="@+id/btn_close_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
+            android:backgroundTint="@color/color_error"
+            android:src="@drawable/ic_delete_text"
+            android:layout_gravity="end|top"/>
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/success_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
