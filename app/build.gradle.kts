@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -47,7 +48,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.9.0")
 
     //UI
@@ -60,27 +60,24 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    
 
     //Retrofit 2
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
-
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation(RETROFIT)
+    implementation(RETROFIT_CONVERT_JSON)
+    implementation(OKHTTP_INTERCEPTOR)
+    implementation(RETROFIT_COROUTINES_ADAPTER)
 
     //Room
-    implementation("androidx.room:room-runtime:2.5.0")
-    kapt("androidx.room:room-compiler:2.5.0")
+    implementation(ROOM_RUNTIME)
+    kapt(ROOM_COMPILER)
 
     //Koin
-    //const val koin_version = "3.1.2"
     //Основная библиотека
-    implementation("io.insert-koin:koin-core:3.3.3")
+    implementation(KOIN_CORE)
     //Koin для поддержки Android (Scope,ViewModel ...)
-    implementation("io.insert-koin:koin-android:3.3.3")
+    implementation(KOIN_ANDROID)
     //Для совместимости с Java
-    implementation("io.insert-koin:koin-android-compat:3.3.3")
+    implementation(KOIN_ANDROID_COMPAT)
 
     //Glide
     implementation("com.github.bumptech.glide:glide:4.14.2")
