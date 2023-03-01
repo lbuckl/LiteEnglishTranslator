@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vados.liteenglishtranslator.R
 import com.vados.liteenglishtranslator.databinding.ActivityMainBinding
-import com.vados.liteenglishtranslator.model.domain.AppState
-import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.molchanov.domain.model.domain.AppState
+import com.molchanov.domain.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
 import com.vados.liteenglishtranslator.utils.getImage
@@ -85,7 +85,7 @@ class MainActivity : BaseActivity<AppState>() {
                 if (appState.progress != null) {
                     binding.progressBarHorizontal.visibility = View.VISIBLE
                     binding.progressBarRound.visibility = View.GONE
-                    binding.progressBarHorizontal.progress = appState.progress
+                    binding.progressBarHorizontal.progress = appState.progress!!
                 } else {
                     binding.progressBarHorizontal.visibility = View.GONE
                     binding.progressBarRound.visibility = View.VISIBLE

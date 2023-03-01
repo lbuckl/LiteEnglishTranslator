@@ -1,7 +1,7 @@
 package com.vados.liteenglishtranslator.model.datasource.remote
 
 import com.vados.liteenglishtranslator.model.datasource.DataSource
-import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.molchanov.domain.model.domain.DataModel
 
 /**
  * Класс для реализации получения данных удалённо от Api

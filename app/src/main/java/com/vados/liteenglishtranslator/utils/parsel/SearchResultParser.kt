@@ -1,9 +1,9 @@
 package com.vados.liteenglishtranslator.utils.parsel
 
-import com.vados.liteenglishtranslator.model.domain.AppState
-import com.vados.liteenglishtranslator.model.domain.DataModel
-import com.vados.liteenglishtranslator.model.domain.Meanings
-import com.vados.liteenglishtranslator.model.domain.Translation
+import com.molchanov.domain.model.domain.AppState
+import com.molchanov.domain.model.domain.DataModel
+import com.molchanov.domain.model.domain.Meanings
+import com.molchanov.domain.model.domain.Translation
 
 /**
  * Функция проверяет результат на нулевые или пустые данные
@@ -36,8 +36,8 @@ fun parseSearchResults(state: AppState): AppState {
 private fun parseResult(dataModel: DataModel, newDataModels: ArrayList<DataModel>) {
     if (!dataModel.text.isNullOrBlank() && !dataModel.meanings.isNullOrEmpty()) {
         val newMeanings = arrayListOf<Meanings>()
-        for (meaning in dataModel.meanings) {
-            if (meaning.translation != null && !meaning.translation.translation.isNullOrBlank()) {
+        for (meaning in dataModel.meanings!!) {
+            if (meaning.translation != null && !meaning.translation!!.translation.isNullOrBlank()) {
                 newMeanings.add(Meanings(meaning.translation, meaning.imageUrl))
             }
         }

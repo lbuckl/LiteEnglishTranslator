@@ -1,19 +1,18 @@
 package com.vados.liteenglishtranslator.di
 
+import com.molchanov.domain.model.domain.DataModel
 import com.vados.liteenglishtranslator.App
 import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
 import com.vados.liteenglishtranslator.model.datasource.local.RoomDataBaseImplementation
 import com.vados.liteenglishtranslator.model.datasource.remote.DataSourceRemote
 import com.vados.liteenglishtranslator.model.datasource.remote.RetrofitImplementation
-import com.vados.liteenglishtranslator.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.repository.RepositoryLocalImplementation
 import com.vados.liteenglishtranslator.model.repository.RepositoryRemoteImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
 import com.vados.liteenglishtranslator.utils.network.INetworkStatus
 import com.vados.liteenglishtranslator.utils.network.NetworkStatus
-import com.vados.liteenglishtranslator.utils.scheluders.SchedulerProvider
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -31,9 +30,6 @@ object DI {
         single<INetworkStatus> {
             NetworkStatus(context = get())
         }
-
-        //Schedulers provider
-        single(qualifier = named("SchedulerProvider")) { SchedulerProvider() }
     }
 
     //Модуль для реализации main компонентов

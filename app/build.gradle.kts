@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -84,5 +83,8 @@ dependencies {
 
     //Coil image download
     implementation("io.coil-kt:coil:2.1.0")
+
+    //Project modules
+    implementation(project(":domain"))
 
 }

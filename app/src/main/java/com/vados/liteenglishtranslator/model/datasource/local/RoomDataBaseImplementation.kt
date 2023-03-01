@@ -3,9 +3,9 @@ package com.vados.liteenglishtranslator.model.datasource.local
 import android.content.Context
 import androidx.room.Room
 import com.vados.liteenglishtranslator.model.datasource.DataSource
-import com.vados.liteenglishtranslator.model.domain.DataModel
-import com.vados.liteenglishtranslator.model.domain.Meanings
-import com.vados.liteenglishtranslator.model.domain.Translation
+import com.molchanov.domain.model.domain.DataModel
+import com.molchanov.domain.model.domain.Meanings
+import com.molchanov.domain.model.domain.Translation
 import com.vados.liteenglishtranslator.utils.parsel.getEmptyDataModel
 
 /**
@@ -45,8 +45,8 @@ class RoomDataBaseImplementation(private val context: Context) : DataSource<List
                 TranslateEntity(
                     0,
                     translations.text!!,
-                    translations.meanings[i].translation!!.translation!!,
-                    translations.meanings[i].imageUrl!!
+                    translations.meanings!![i].translation!!.translation!!,
+                    translations.meanings!![i].imageUrl!!
                 )
             )
         }

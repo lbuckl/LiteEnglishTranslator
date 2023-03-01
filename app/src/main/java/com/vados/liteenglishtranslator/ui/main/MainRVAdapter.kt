@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vados.liteenglishtranslator.databinding.ActivityMainRecyclerviewItemBinding
-import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.molchanov.domain.model.domain.DataModel
 import com.vados.liteenglishtranslator.utils.parsel.convertMeaningsToString
 
 /**

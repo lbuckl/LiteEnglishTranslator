@@ -1,6 +1,6 @@
 package com.vados.liteenglishtranslator.model.datasource.remote
 
-import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.molchanov.domain.model.domain.DataModel
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query

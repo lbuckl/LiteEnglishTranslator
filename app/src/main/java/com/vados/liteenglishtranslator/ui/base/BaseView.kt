@@ -1,6 +1,6 @@
 package com.vados.liteenglishtranslator.ui.base
 
-import com.vados.liteenglishtranslator.model.domain.AppState
+import com.molchanov.domain.model.domain.AppState
 
 /**
  * Базовый интерфейс для реализации BaseActivity

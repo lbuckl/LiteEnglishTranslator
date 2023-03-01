@@ -1,7 +1,7 @@
 package com.vados.liteenglishtranslator.ui.interactor
 
-import com.vados.liteenglishtranslator.model.domain.AppState
-import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.molchanov.domain.model.domain.AppState
+import com.molchanov.domain.model.domain.DataModel
 import com.vados.liteenglishtranslator.model.repository.RepositoryLocal
 import com.vados.liteenglishtranslator.model.repository.RepositoryRemote
 

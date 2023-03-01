@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.model.domain
+package com.molchanov.domain.model.domain
 
 import com.google.gson.annotations.SerializedName
 

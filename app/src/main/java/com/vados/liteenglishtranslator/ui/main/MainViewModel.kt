@@ -2,7 +2,7 @@ package com.vados.liteenglishtranslator.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.vados.liteenglishtranslator.model.domain.AppState
+import com.molchanov.domain.model.domain.AppState
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.utils.parsel.parseSearchResults
 import kotlinx.coroutines.Dispatchers

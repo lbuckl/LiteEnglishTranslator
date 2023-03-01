@@ -1,7 +1,7 @@
 package com.vados.liteenglishtranslator.model.repository
 
 import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
-import com.vados.liteenglishtranslator.model.domain.DataModel
+import com.molchanov.domain.model.domain.DataModel
 
 class RepositoryLocalImplementation(private val dataSource: DataSourceLocal) :
     RepositoryLocal<List<DataModel>> {
