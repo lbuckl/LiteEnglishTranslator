@@ -1,6 +1,6 @@
-package com.vados.liteenglishtranslator.model.datasource.remote
+package com.molchanov.data.datasource.remote
 
-import com.vados.liteenglishtranslator.model.datasource.DataSource
+import com.molchanov.data.datasource.DataSource
 import com.molchanov.domain.model.domain.DataModel
 
 /**

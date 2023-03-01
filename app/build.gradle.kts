@@ -60,16 +60,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    //Retrofit 2
-    implementation(RETROFIT)
-    implementation(RETROFIT_CONVERT_JSON)
-    implementation(OKHTTP_INTERCEPTOR)
-    implementation(RETROFIT_COROUTINES_ADAPTER)
-
-    //Room
-    implementation(ROOM_RUNTIME)
-    kapt(ROOM_COMPILER)
-
     //Koin
     //Основная библиотека
     implementation(KOIN_CORE)
@@ -89,5 +79,7 @@ dependencies {
     implementation(project(":domain"))
 
     implementation(project(":utils"))
+
+    implementation(project(":data"))
 
 }

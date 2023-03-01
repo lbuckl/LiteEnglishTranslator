@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.model.datasource.remote
+package com.molchanov.data.datasource.remote
 
 import com.molchanov.domain.model.domain.DataModel
 import kotlinx.coroutines.Deferred

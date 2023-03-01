@@ -1,6 +1,6 @@
-package com.vados.liteenglishtranslator.model.repository
+package com.molchanov.data.repository
 
-import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
+import com.molchanov.data.datasource.local.DataSourceLocal
 import com.molchanov.domain.model.domain.DataModel
 
 class RepositoryLocalImplementation(private val dataSource: DataSourceLocal) :

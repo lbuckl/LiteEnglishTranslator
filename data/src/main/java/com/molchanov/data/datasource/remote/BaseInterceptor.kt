@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.model.datasource.remote
+package com.molchanov.data.datasource.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response

@@ -1,7 +1,7 @@
-package com.vados.liteenglishtranslator.model.datasource.local
+package com.molchanov.data.datasource.local
 
+import com.molchanov.data.datasource.DataSource
 import com.molchanov.domain.model.domain.DataModel
-import com.vados.liteenglishtranslator.model.datasource.DataSource
 
 /**
  * Класс для реализации записи и получения данных из кеша

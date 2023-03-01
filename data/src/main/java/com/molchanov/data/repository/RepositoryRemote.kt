@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.model.repository
+package com.molchanov.data.repository
 
 /**
  * Интерфейс основного репозитория

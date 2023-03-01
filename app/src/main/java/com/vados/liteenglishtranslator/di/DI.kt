@@ -2,13 +2,13 @@ package com.vados.liteenglishtranslator.di
 
 import com.molchanov.domain.model.domain.DataModel
 import com.vados.liteenglishtranslator.App
-import com.vados.liteenglishtranslator.model.datasource.DataSource
-import com.vados.liteenglishtranslator.model.datasource.local.DataSourceLocal
-import com.vados.liteenglishtranslator.model.datasource.local.RoomDataBaseImplementation
-import com.vados.liteenglishtranslator.model.datasource.remote.DataSourceRemote
-import com.vados.liteenglishtranslator.model.datasource.remote.RetrofitImplementation
-import com.vados.liteenglishtranslator.model.repository.RepositoryLocalImplementation
-import com.vados.liteenglishtranslator.model.repository.RepositoryRemoteImplementation
+import com.molchanov.data.datasource.DataSource
+import com.molchanov.data.datasource.local.DataSourceLocal
+import com.molchanov.data.datasource.local.RoomDataBaseImplementation
+import com.molchanov.data.datasource.remote.DataSourceRemote
+import com.molchanov.data.datasource.remote.RetrofitImplementation
+import com.molchanov.data.repository.RepositoryLocalImplementation
+import com.molchanov.data.repository.RepositoryRemoteImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
 import com.molchanov.utils.network.INetworkStatus

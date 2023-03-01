@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.model.datasource.local
+package com.molchanov.data.datasource.local
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

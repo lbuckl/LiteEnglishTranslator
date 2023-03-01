@@ -1,8 +1,8 @@
-package com.vados.liteenglishtranslator.model.datasource.local
+package com.molchanov.data.datasource.local
 
 import android.content.Context
 import androidx.room.Room
-import com.vados.liteenglishtranslator.model.datasource.DataSource
+import com.molchanov.data.datasource.DataSource
 import com.molchanov.domain.model.domain.DataModel
 import com.molchanov.domain.model.domain.Meanings
 import com.molchanov.domain.model.domain.Translation

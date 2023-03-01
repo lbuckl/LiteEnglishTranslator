@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.model.repository
+package com.molchanov.data.repository
 
 import com.molchanov.domain.model.domain.DataModel
 
