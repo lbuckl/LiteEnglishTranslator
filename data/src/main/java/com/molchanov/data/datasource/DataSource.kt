@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.model.datasource
+package com.molchanov.data.datasource
 
 /**
  * Основной интерфейс получения данных

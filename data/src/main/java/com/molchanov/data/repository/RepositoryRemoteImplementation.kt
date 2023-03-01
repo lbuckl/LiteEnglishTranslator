@@ -1,6 +1,6 @@
-package com.vados.liteenglishtranslator.model.repository
+package com.molchanov.data.repository
 
-import com.vados.liteenglishtranslator.model.datasource.DataSource
+import com.molchanov.data.datasource.DataSource
 import com.molchanov.domain.model.domain.DataModel
 
 /**

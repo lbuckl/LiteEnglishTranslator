@@ -2,8 +2,8 @@ package com.vados.liteenglishtranslator.ui.interactor
 
 import com.molchanov.domain.model.domain.AppState
 import com.molchanov.domain.model.domain.DataModel
-import com.vados.liteenglishtranslator.model.repository.RepositoryLocal
-import com.vados.liteenglishtranslator.model.repository.RepositoryRemote
+import com.molchanov.data.repository.RepositoryLocal
+import com.molchanov.data.repository.RepositoryRemote
 
 /**
  * Класс интерактора для получения данных локально/через Api

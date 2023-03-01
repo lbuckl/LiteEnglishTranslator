@@ -90,4 +90,6 @@ dependencies {
 
     implementation(project(":utils"))
 
+    implementation(project(":data"))
+
 }

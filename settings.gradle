@@ -16,3 +16,4 @@ rootProject.name = "LiteEnglishTranslator"
 include ':app'
 include ':domain'
 include ':utils'
+include ':data'
