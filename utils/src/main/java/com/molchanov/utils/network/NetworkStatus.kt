@@ -1,9 +1,10 @@
-package com.vados.liteenglishtranslator.utils.network
+package com.molchanov.utils.network
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

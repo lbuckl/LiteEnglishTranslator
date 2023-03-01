@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vados.liteenglishtranslator.databinding.ActivityMainRecyclerviewItemBinding
 import com.molchanov.domain.model.domain.DataModel
-import com.vados.liteenglishtranslator.utils.parsel.convertMeaningsToString
+import com.molchanov.utils.parsel.convertMeaningsToString
 
 /**
  * Адаптер для вывода результатов перевода в элементы RecyclerView

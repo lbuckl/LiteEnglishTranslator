@@ -1,14 +1,12 @@
-package com.vados.liteenglishtranslator.utils
+package com.molchanov.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import coil.ImageLoader
 import coil.request.ImageRequest
 import com.bumptech.glide.Glide
-import com.vados.liteenglishtranslator.R
 
 /**
  * Функция загрузки изображния по URL с помощью Glide

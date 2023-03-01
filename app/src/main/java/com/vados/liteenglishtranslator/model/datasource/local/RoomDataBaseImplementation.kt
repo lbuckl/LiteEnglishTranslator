@@ -6,7 +6,7 @@ import com.vados.liteenglishtranslator.model.datasource.DataSource
 import com.molchanov.domain.model.domain.DataModel
 import com.molchanov.domain.model.domain.Meanings
 import com.molchanov.domain.model.domain.Translation
-import com.vados.liteenglishtranslator.utils.parsel.getEmptyDataModel
+import com.molchanov.utils.parsel.getEmptyDataModel
 
 /**
  * Класс для реализации получения данных из БД Room

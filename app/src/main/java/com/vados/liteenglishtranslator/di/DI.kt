@@ -11,8 +11,8 @@ import com.vados.liteenglishtranslator.model.repository.RepositoryLocalImplement
 import com.vados.liteenglishtranslator.model.repository.RepositoryRemoteImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
-import com.vados.liteenglishtranslator.utils.network.INetworkStatus
-import com.vados.liteenglishtranslator.utils.network.NetworkStatus
+import com.molchanov.utils.network.INetworkStatus
+import com.molchanov.utils.network.NetworkStatus
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

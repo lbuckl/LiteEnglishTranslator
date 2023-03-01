@@ -1,4 +1,4 @@
-package com.vados.liteenglishtranslator.utils.parsel
+package com.molchanov.utils.parsel
 
 import com.molchanov.domain.model.domain.AppState
 import com.molchanov.domain.model.domain.DataModel

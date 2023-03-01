@@ -84,7 +84,10 @@ dependencies {
     //Coil image download
     implementation("io.coil-kt:coil:2.1.0")
 
+
     //Project modules
     implementation(project(":domain"))
+
+    implementation(project(":utils"))
 
 }

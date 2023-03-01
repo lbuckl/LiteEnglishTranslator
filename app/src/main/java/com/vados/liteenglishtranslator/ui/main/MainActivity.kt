@@ -10,8 +10,8 @@ import com.molchanov.domain.model.domain.AppState
 import com.molchanov.domain.model.domain.DataModel
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
-import com.vados.liteenglishtranslator.utils.getImage
-import com.vados.liteenglishtranslator.utils.network.INetworkStatus
+import com.molchanov.utils.getImage
+import com.molchanov.utils.network.INetworkStatus
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel

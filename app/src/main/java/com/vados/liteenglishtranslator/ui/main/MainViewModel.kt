@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.molchanov.domain.model.domain.AppState
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
-import com.vados.liteenglishtranslator.utils.parsel.parseSearchResults
+import com.molchanov.utils.parsel.parseSearchResults
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.qualifier.named
