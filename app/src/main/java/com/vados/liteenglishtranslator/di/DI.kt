@@ -68,6 +68,7 @@ object DI {
         scope(named<MainActivity>()){
             scoped {
                 MainViewModel()
+
             }
         }
     }

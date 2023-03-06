@@ -48,6 +48,7 @@ android {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.21")
 
     //UI
     implementation("androidx.appcompat:appcompat:1.6.0")

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.molchanov.domain.model.domain.AppState
 import com.molchanov.domain.model.domain.DataModel
 import com.molchanov.utils.getImage
@@ -12,6 +13,7 @@ import com.vados.liteenglishtranslator.R
 import com.vados.liteenglishtranslator.databinding.ActivityMainBinding
 import com.vados.liteenglishtranslator.ui.SearchDialogFragment
 import com.vados.liteenglishtranslator.ui.base.BaseActivity
+import com.vados.liteenglishtranslator.ui.viewById
 import kotlinx.coroutines.*
 import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
@@ -130,7 +132,9 @@ class MainActivity : BaseActivity<AppState>() {
      * кнопки поиска/перевода слова
      */
     private fun initFabClickListener() {
-        binding.searchFab.setOnClickListener {
+        val searchFAB by viewById<FloatingActionButton>(R.id.search_fab)
+
+        searchFAB.setOnClickListener {
             //Создаём диологовое окно
             val searchDialogFragment = SearchDialogFragment.newInstance()
 
