@@ -7,12 +7,16 @@ import com.molchanov.data.datasource.local.DataSourceLocal
 import com.molchanov.data.datasource.local.RoomDataBaseImplementation
 import com.molchanov.data.datasource.remote.DataSourceRemote
 import com.molchanov.data.datasource.remote.RetrofitImplementation
+import com.molchanov.data.repository.RepositoryLocal
 import com.molchanov.data.repository.RepositoryLocalImplementation
+import com.molchanov.data.repository.RepositoryRemote
 import com.molchanov.data.repository.RepositoryRemoteImplementation
 import com.vados.liteenglishtranslator.ui.interactor.MainInteractor
 import com.vados.liteenglishtranslator.ui.main.MainViewModel
 import com.molchanov.utils.network.INetworkStatus
 import com.molchanov.utils.network.NetworkStatus
+import com.vados.liteenglishtranslator.ui.main.MainActivity
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -32,9 +36,8 @@ object DI {
         }
     }
 
-    //Модуль для реализации main компонентов
-    val mainModule = module {
-
+    //Модуль для реализации компонентов репозитория
+    val repoModule = module {
         single<DataSource<List<DataModel>>>(named("remoteProvider")) {
             DataSourceRemote(RetrofitImplementation())
         }
@@ -43,14 +46,29 @@ object DI {
             DataSourceLocal(RoomDataBaseImplementation(context = get()))
         }
 
+        single<RepositoryRemote<List<DataModel>>> {
+            RepositoryRemoteImplementation(get(named("remoteProvider")))
+        }
+
+        single<RepositoryLocal<List<DataModel>>> {
+            RepositoryLocalImplementation(get(named("roomDB")))
+        }
+    }
+
+    //Модуль для реализации компонентов Main
+    val mainModule = module {
         //MainInterActor
         factory(qualifier = named("MainInterActor")) {
             MainInteractor(
-                RepositoryRemoteImplementation(get(named("remoteProvider"))),
-                RepositoryLocalImplementation(get(named("roomDB")))
+                get(),
+                get()
             )
         }
-        //MainViewModel
-        single { MainViewModel() }
+
+        scope(named<MainActivity>()){
+            scoped {
+                MainViewModel()
+            }
+        }
     }
 }

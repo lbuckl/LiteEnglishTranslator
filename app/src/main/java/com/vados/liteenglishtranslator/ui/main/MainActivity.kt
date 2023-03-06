@@ -4,25 +4,25 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vados.liteenglishtranslator.R
-import com.vados.liteenglishtranslator.databinding.ActivityMainBinding
 import com.molchanov.domain.model.domain.AppState
 import com.molchanov.domain.model.domain.DataModel
-import com.vados.liteenglishtranslator.ui.SearchDialogFragment
-import com.vados.liteenglishtranslator.ui.base.BaseActivity
 import com.molchanov.utils.getImage
 import com.molchanov.utils.network.INetworkStatus
+import com.vados.liteenglishtranslator.R
+import com.vados.liteenglishtranslator.databinding.ActivityMainBinding
+import com.vados.liteenglishtranslator.ui.SearchDialogFragment
+import com.vados.liteenglishtranslator.ui.base.BaseActivity
 import kotlinx.coroutines.*
+import org.koin.android.ext.android.getKoin
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Активити реализующая работу переводчика
  */
 class MainActivity : BaseActivity<AppState>() {
 
-    private val mainScope = CoroutineScope(Dispatchers.Main)
-    private val ioScope = CoroutineScope(Dispatchers.IO)
+    private val mainCoroutineScope = CoroutineScope(Dispatchers.Main)
+    private val ioCoroutineScope = CoroutineScope(Dispatchers.IO)
 
     private lateinit var binding: ActivityMainBinding
 
@@ -30,8 +30,10 @@ class MainActivity : BaseActivity<AppState>() {
 
     //region Koin implementation
     private val networkStatus: INetworkStatus by inject()
+    
+    private val mainKoinScope = getKoin().getOrCreateScope<MainActivity>("myScope")
 
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: MainViewModel by mainKoinScope.inject()
     //endregion
 
     /**
@@ -41,7 +43,7 @@ class MainActivity : BaseActivity<AppState>() {
         object : MainRVAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
 
-                ioScope.launch {
+                ioCoroutineScope.launch {
                     val icon = getImage(this@MainActivity, data.meanings!![0].imageUrl)
 
                     withContext(Dispatchers.Main) {
@@ -156,11 +158,11 @@ class MainActivity : BaseActivity<AppState>() {
                     Toast.LENGTH_SHORT
                 )
                     .show()
-                mainScope.launch {
+                mainCoroutineScope.launch {
                     viewModel.getData(searchWord, false)
                 }
             } else {
-                mainScope.launch {
+                mainCoroutineScope.launch {
                     viewModel.getData(searchWord, true)
                 }
             }
@@ -176,11 +178,11 @@ class MainActivity : BaseActivity<AppState>() {
                     Toast.LENGTH_SHORT
                 )
                     .show()
-                mainScope.launch {
+                mainCoroutineScope.launch {
                     viewModel.reloadData(false)
                 }
             } else {
-                mainScope.launch {
+                mainCoroutineScope.launch {
                     viewModel.reloadData(true)
                 }
             }
@@ -230,7 +232,9 @@ class MainActivity : BaseActivity<AppState>() {
     override fun onDestroy() {
         super.onDestroy()
 
-        ioScope.cancel()
-        mainScope.cancel()
+        ioCoroutineScope.cancel()
+        mainCoroutineScope.cancel()
+
+        mainKoinScope.close()
     }
 }

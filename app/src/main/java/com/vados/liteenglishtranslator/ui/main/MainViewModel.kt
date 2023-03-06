@@ -12,6 +12,7 @@ import org.koin.java.KoinJavaComponent.inject
 
 class MainViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData<AppState>()
+    //private val interactor: MainInteractor
 ) : ViewModel(), IViewModel {
 
     private var lastWord = ""
