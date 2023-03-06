@@ -32,7 +32,7 @@ class MainActivity : BaseActivity<AppState>() {
 
     //region Koin implementation
     private val networkStatus: INetworkStatus by inject()
-    
+
     private val mainKoinScope = getKoin().getOrCreateScope<MainActivity>("myScope")
 
     private val viewModel: MainViewModel by mainKoinScope.inject()

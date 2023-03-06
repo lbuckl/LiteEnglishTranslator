@@ -17,7 +17,7 @@ class App : Application() {
         instance = this
 
         startKoin {
-            modules(listOf(DI.appModule,DI.repoModule , DI.mainModule))
+            modules(listOf(DI.appModule, DI.repoModule, DI.mainModule))
         }
     }
 }

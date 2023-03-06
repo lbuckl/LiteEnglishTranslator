@@ -26,7 +26,7 @@ class ViewByIdDelegate<out T : View>(
         if (currentRoot != cachedRoot || view == null) {
             if (currentRoot == null) {
                 if (view != null) {
-                // Failsafe, возвращать хотя бы последнюю View
+                    // Failsafe, возвращать хотя бы последнюю View
                     return view
                 }
                 throw IllegalStateException("Cannot get View, there is no root yet")
@@ -46,5 +46,5 @@ class ViewByIdDelegate<out T : View>(
 
 fun <T : View> Activity.viewById(@IdRes viewId: Int): ViewByIdDelegate<T> {
     // Возвращаем корневую View
-    return ViewByIdDelegate({window.decorView.findViewById(android.R.id.content)}, viewId)
+    return ViewByIdDelegate({ window.decorView.findViewById(android.R.id.content) }, viewId)
 }
