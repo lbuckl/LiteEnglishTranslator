@@ -1,8 +1,12 @@
 package com.vados.liteenglishtranslator.ui.main
 
+import android.graphics.RenderEffect
+import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,6 +34,9 @@ class MainActivity : BaseActivity<AppState>() {
     private lateinit var binding: ActivityMainBinding
 
     private var adapter: MainRVAdapter? = null
+
+    private val renderActivateRadius = 10.0F
+    private val renderDeactivateRadius = 0.001F
 
     //region Koin implementation
     private val networkStatus: INetworkStatus by inject()
@@ -103,6 +110,8 @@ class MainActivity : BaseActivity<AppState>() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
@@ -135,12 +144,15 @@ class MainActivity : BaseActivity<AppState>() {
      * Функция инициализирует и управляет действиями
      * кнопки поиска/перевода слова
      */
+
     private fun initFabClickListener() {
         val searchFAB by viewById<FloatingActionButton>(R.id.search_fab)
 
         searchFAB.setOnClickListener {
             //Создаём диологовое окно
             val searchDialogFragment = SearchDialogFragment.newInstance()
+
+            blurEffect(true)
 
             //Инициализируем прослушку
             searchDialogFragment.setOnSearchClickListener(object :
@@ -149,11 +161,28 @@ class MainActivity : BaseActivity<AppState>() {
                 //послаем запрос на перевод слова приходящего колбэком
                 override fun onClick(searchWord: String) {
                     dataRequest(searchWord)
+
+                    blurEffect(false)
                 }
             })
 
             //отображаем диологовое окно
             searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
+        }
+    }
+    private fun blurEffect(set: Boolean){
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            if (set) binding.successLinearLayout.setRenderEffect(
+                RenderEffect.createBlurEffect(
+                    renderActivateRadius,renderActivateRadius, Shader.TileMode.MIRROR
+                )
+            )
+            else binding.successLinearLayout.setRenderEffect(
+                RenderEffect.createBlurEffect(
+                    renderDeactivateRadius,renderDeactivateRadius, Shader.TileMode.MIRROR
+                )
+            )
         }
     }
 

@@ -14,4 +14,7 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.MySplashScreenTheme" parent="Theme.MyTheme">
+    </style>
 </resources>
