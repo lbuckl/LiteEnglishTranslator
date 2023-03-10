@@ -50,6 +50,9 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.21")
 
+    //Splash
+    implementation("androidx.core:core-splashscreen:1.0.0")
+
     //UI
     implementation("androidx.appcompat:appcompat:1.6.0")
     implementation("com.google.android.material:material:1.7.0")

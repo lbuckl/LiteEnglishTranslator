@@ -3,6 +3,7 @@ package com.vados.liteenglishtranslator.ui.main
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.molchanov.domain.model.domain.AppState
@@ -105,6 +106,7 @@ class MainActivity : BaseActivity<AppState>() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         initFabClickListener()

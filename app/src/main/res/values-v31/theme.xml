@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MySplashScreenTheme" parent="Theme.MyTheme">
+        <item name="postSplashScreenTheme">@style/Theme.MyTheme</item>
+        <item name="android:windowSplashScreenBackground">?colorPrimary</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/pic_translate</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/color_gray</item>
+    </style>
+</resources>
